@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
+using System.IO;                // Directory.GetCurrentDirectory()
+
 namespace IFilter
 {
     [Flags]
@@ -260,7 +262,8 @@ namespace IFilter
 
             try
             {
-                filter = loadIFilter(path);
+				string sciezka = Directory.GetCurrentDirectory();
+				filter = loadIFilter(path);
 
                 if (filter == null)
                 {
