@@ -274,13 +274,13 @@ namespace IFilter
                 STAT_CHUNK ps = new STAT_CHUNK();
 
                 IFILTER_INIT iflags =
-                    IFILTER_INIT.CANON_HYPHENS |
-                    IFILTER_INIT.CANON_PARAGRAPHS |
-                    IFILTER_INIT.CANON_SPACES |
-                    IFILTER_INIT.APPLY_CRAWL_ATTRIBUTES |
+					IFILTER_INIT.CANON_HYPHENS |
+					IFILTER_INIT.CANON_PARAGRAPHS |
+					IFILTER_INIT.CANON_SPACES |				// to chyba wsadza wszystkie spacje zamiast zpecialnych znakow
+					IFILTER_INIT.HARD_LINE_BREAKS |
+					IFILTER_INIT.APPLY_CRAWL_ATTRIBUTES |
                     IFILTER_INIT.APPLY_INDEX_ATTRIBUTES |
                     IFILTER_INIT.APPLY_OTHER_ATTRIBUTES |
-                    IFILTER_INIT.HARD_LINE_BREAKS |
                     IFILTER_INIT.SEARCH_LINKS |
                     IFILTER_INIT.FILTER_OWNED_VALUE_OK;
 
@@ -299,7 +299,10 @@ namespace IFilter
 
                             scode = (IFilterReturnCodes)filter.GetText(ref pcwcBuffer, sbBuffer);
 
-                            if (pcwcBuffer > 0 && sbBuffer.Length > 0)
+							// Kamil
+							// scode = (IFilterReturnCodes)filter.GetChunk( (ref pcwcBuffer, sbBuffer);
+
+							if (pcwcBuffer > 0 && sbBuffer.Length > 0)
                             {
                                 if (sbBuffer.Length < pcwcBuffer) // Should never happen, but it happens !
                                     pcwcBuffer = (uint)sbBuffer.Length;
